@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>V.E</title>
+<style>
+:root{--bg:#0e0b1f;--ink:#efe8f6;--dim:#9a90b3;--v:#ff8fa8;--e:#ffd08a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*:before,*:after{box-sizing:inherit}
+html,body{height:100%;margin:0}
+body{background:radial-gradient(ellipse at 50% 40%,#231a42 0%,var(--bg) 65%);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center}
+canvas{position:fixed;inset:0;width:100%;height:100%;z-index:0}
+main{position:relative;z-index:1;padding:24px;width:100%}
+.logo{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-weight:600;font-size:clamp(96px,26vw,220px);line-height:1;display:flex;align-items:center;justify-content:center;gap:.04em}
+.l{display:inline-block;opacity:0}
+.v{color:var(--v);text-shadow:0 0 40px rgba(255,143,168,.55);animation:fromL 2.4s cubic-bezier(.2,.8,.2,1) .3s forwards}
+.e{color:var(--e);text-shadow:0 0 40px rgba(255,208,138,.5);animation:fromR 2.4s cubic-bezier(.2,.8,.2,1) .3s forwards}
+@keyframes fromL{from{opacity:0;transform:translateX(-45vw) blur(0);filter:blur(14px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes fromR{from{opacity:0;transform:translateX(45vw);filter:blur(14px)}to{opacity:1;transform:none;filter:blur(0)}}
+.dot{position:relative;width:clamp(16px,3.6vw,28px);height:clamp(16px,3.6vw,28px);border-radius:50%;border:0;padding:0;margin:0 .1em;align-self:flex-end;margin-bottom:.22em;background:#fff;box-shadow:0 0 18px 4px rgba(255,255,255,.8),0 0 60px 14px rgba(255,160,190,.5);cursor:pointer;opacity:0;transform:scale(0);animation:ignite .8s ease 2.6s forwards,beat 2.6s ease-in-out 3.4s infinite}
+.dot:before{content:"";position:absolute;inset:-10px;border-radius:50%;border:1px solid rgba(255,255,255,.5);animation:ring 2.6s ease-out 3.4s infinite}
+.dot:focus-visible{outline:2px solid var(--e);outline-offset:8px}
+@keyframes ignite{to{opacity:1;transform:scale(1)}}
+@keyframes beat{0%,100%{transform:scale(1)}50%{transform:scale(1.3)}}
+@keyframes ring{0%{transform:scale(.8);opacity:.9}100%{transform:scale(3.2);opacity:0}}
+.say{height:2.6em;margin:26px auto 0;font-size:clamp(18px,4.6vw,24px);font-weight:300;letter-spacing:.02em;opacity:0;animation:show 1s ease 3.6s forwards}
+.say span{display:inline-block;transition:opacity .9s,filter .9s,transform .9s}
+.say span.out{opacity:0;filter:blur(8px);transform:translateY(6px)}
+@keyframes show{to{opacity:1}}
+.bar{width:min(300px,70vw);height:3px;margin:8px auto 0;background:rgba(255,255,255,.1);border-radius:3px;overflow:hidden;opacity:0;animation:show 1s ease 4s forwards}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--v),var(--e));border-radius:3px;animation:fill 5s cubic-bezier(.3,.6,.2,1) 4.2s forwards,glow 2.4s ease-in-out 9s infinite}
+@keyframes fill{to{width:87%}}
+@keyframes glow{50%{opacity:.55}}
+.hint{margin-top:16px;font-size:14px;color:var(--dim);opacity:0;animation:show 1.4s ease 6s forwards}
+.secret{min-height:1.6em;margin-top:22px;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:clamp(20px,5vw,28px);color:var(--v);transition:opacity .6s}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01s!important;animation-delay:0s!important;animation-iteration-count:1!important}}
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,600&family=Manrope:wght@300;400&display=swap">
+</head>
+<body>
+<canvas id="c" aria-hidden="true"></canvas>
+<main>
+  <div class="logo" aria-label="V nokta E">
+    <span class="l v">V</span><button class="dot" id="dot" aria-label="Noktaya dokun"></button><span class="l e">E</span>
+  </div>
+  <div class="say" id="say" aria-live="polite"><span>Bir şey hazırlanıyor.</span></div>
+  <div class="bar" aria-hidden="true"><i></i></div>
+  <div class="hint">Neredeyse hazır. Parlayan noktaya dokunmayı dene.</div>
+  <div class="secret" id="secret" aria-live="polite"></div>
+</main>
+<script>
+(function(){
+  // starfield
+  var cv=document.getElementById('c'),cx=cv.getContext('2d'),W,H,S=[],mx=0,my=0,dpr=Math.min(window.devicePixelRatio||1,2);
+  function size(){W=cv.width=innerWidth*dpr;H=cv.height=innerHeight*dpr;S=[];for(var i=0;i<110;i++)S.push({x:Math.random()*W,y:Math.random()*H,r:(Math.random()*1.4+.3)*dpr,p:Math.random()*6.28,s:Math.random()*.02+.005,d:Math.random()*.04+.01})}
+  size();addEventListener('resize',size);
+  addEventListener('pointermove',function(e){mx=(e.clientX/innerWidth-.5);my=(e.clientY/innerHeight-.5)});
+  var still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  function draw(t){
+    cx.clearRect(0,0,W,H);
+    for(var i=0;i<S.length;i++){var s=S[i],a=.35+.55*Math.abs(Math.sin(t*s.s*.1+s.p));
+      var x=s.x-mx*s.d*W*.3,y=s.y-my*s.d*H*.3;
+      cx.beginPath();cx.arc(x,y,s.r,0,6.28);cx.fillStyle='rgba('+(i%3?'239,232,246':'255,170,195')+','+a+')';cx.fill();}
+    if(!still)requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+
+  // rotating teasers
+  var lines=["Hazırlanıyor…","Yakında burada olacak."],
+      say=document.getElementById('say'),i=0;
+  setInterval(function(){
+    var old=say.firstElementChild;old.classList.add('out');
+    setTimeout(function(){i=(i+1)%lines.length;var n=document.createElement('span');n.textContent=lines[i];n.className='out';say.innerHTML='';say.appendChild(n);
+      requestAnimationFrame(function(){requestAnimationFrame(function(){n.classList.remove('out')})});},900);
+  },3600);
+
+  // secret messages on dot tap
+  var secrets=["Güzel şeyler sabredenleri bulur.","En güzel yolculuklar iki kişiyle başlar.","Bazı hikâyeler küçük bir noktadan büyür.","Gülümsemek, dünyanın en kısa yoludur kalbe.","Birlikte olunca sıradan günler bile güzel.","Sevgi, en sessiz dilde en yüksek sesle konuşur.","Her yeni başlangıç biraz heyecan, biraz umuttur.","İyi ki varsın demek için bahane gerekmez.","Mutluluk, paylaşıldıkça çoğalır.","Yıldızlar bile geceyi birlikte aydınlatır."],
+      sec=document.getElementById('secret'),k=0,tm;
+  document.getElementById('dot').addEventListener('click',function(){
+    sec.style.opacity=0;clearTimeout(tm);
+    tm=setTimeout(function(){sec.textContent=secrets[k%secrets.length];k++;sec.style.opacity=1;},350);
+  });
+})();
+</script>
+</body>
+</html>
