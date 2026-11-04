@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Paylaşımlar · Gökköy Köyü</title>
+<link rel="stylesheet" href="fontawesome/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Bitter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f8fd;--bg2:#e4f0fa;--card:#fff;--ink:#0d2540;--mut:#51677f;--blue:#0b3d78;--sky:#1b8fcf;--gold:#c9a24b;--line:#0b3d7820}
+[data-theme=night]{--bg:#08192f;--bg2:#0d2342;--card:#0f2748;--ink:#e8f2ff;--mut:#9db8d6;--line:#ffffff1f}
+*{box-sizing:border-box}body{margin:0;font-family:Bitter,Georgia,serif;background:var(--bg);color:var(--ink);line-height:1.6;transition:background .4s}
+h1,h2,h3,.f,button,select{font-family:Fredoka,system-ui,sans-serif}
+nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--card) 85%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);box-shadow:0 6px 24px #0a1f4414}
+.nv{max-width:680px;margin:0 auto;padding:10px 14px;display:flex;align-items:center;gap:10px}
+.nv a{text-decoration:none;color:var(--blue);font-family:Fredoka;font-weight:600}[data-theme=night] .nv a{color:#fff}
+.nv b{margin-left:auto}.ib{border:0;background:transparent;color:var(--ink);width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:18px}.ib:hover{background:var(--bg2)}
+main{max-width:680px;margin:0 auto;padding:18px 14px 60px}
+h1{margin:6px 0 4px;font-size:30px;color:var(--blue)}[data-theme=night] h1{color:#fff}h1 i{color:var(--gold)}
+.sub{color:var(--mut);margin:0 0 18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:16px;box-shadow:0 1px 2px #0a1f4410,0 10px 30px -14px #0a1f4430}
+.av{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:#fff;font:700 18px Fredoka;background:linear-gradient(135deg,var(--sky),var(--blue));flex:none}
+.row{display:flex;gap:12px;align-items:center}
+textarea,input[type=text],input[type=password]{width:100%;font:inherit;color:inherit;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:12px}
+textarea{resize:vertical;min-height:96px;margin:12px 0 8px;border-radius:16px}textarea:focus,input:focus{outline:2px solid var(--sky);outline-offset:1px}
+.pills{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 10px}.pills label{cursor:pointer}.pills input{display:none}
+.pills span{display:inline-block;padding:6px 14px;border-radius:99px;border:1.5px solid var(--line);font:500 14px Fredoka;transition:.2s}
+.pills input:checked+span{background:var(--blue);border-color:var(--blue);color:#fff}
+.bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.bar .sp{flex:1}
+.btn{border:0;border-radius:12px;padding:10px 18px;font:600 15px Fredoka;color:#fff;cursor:pointer;background:linear-gradient(135deg,var(--blue),color-mix(in srgb,var(--blue) 70%,#000));box-shadow:0 6px 18px -6px #0a2a6a80;transition:.25s}
+.btn:hover{transform:translateY(-2px)}.btn[disabled]{opacity:.55;transform:none}
+.ghost{background:var(--bg2);color:var(--ink);box-shadow:none}.red{background:#b3261e}
+.prev{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}.prev div{position:relative;aspect-ratio:1;border-radius:12px;overflow:hidden}
+.prev img{width:100%;height:100%;object-fit:cover}.prev button{position:absolute;top:4px;right:4px;width:24px;height:24px;border:0;border-radius:50%;background:#000a;color:#fff;cursor:pointer}
+.meta b{display:block;font-family:Fredoka}.meta small{color:var(--mut)}
+.tag{margin-left:auto;font:600 12px Fredoka;padding:4px 12px;border-radius:99px;background:var(--bg2);color:var(--sky)}
+.txt{margin:12px 0;white-space:pre-wrap;word-wrap:break-word;font-size:16px}
+.ph{display:grid;gap:4px;border-radius:14px;overflow:hidden;margin:10px 0}.ph img{width:100%;height:100%;object-fit:cover;cursor:pointer;display:block;min-height:120px;max-height:460px}
+.ph.n1{grid-template-columns:1fr}.ph.n2,.ph.n4{grid-template-columns:1fr 1fr}.ph.n3{grid-template-columns:1fr 1fr}.ph.n3 img:first-child{grid-column:1/3}
+.act{display:flex;gap:8px;border-top:1px solid var(--line);padding-top:10px;margin-top:6px}.act button{flex:1;border:0;background:transparent;color:var(--mut);padding:8px;border-radius:10px;cursor:pointer;font-size:15px}.act button:hover{background:var(--bg2);color:var(--ink)}
+.empty{text-align:center;color:var(--mut);padding:30px}#lb{position:fixed;inset:0;background:#000d;display:none;place-items:center;z-index:50;padding:16px}#lb.on{display:grid}#lb img{max-width:100%;max-height:92vh;border-radius:12px}
+.err{color:#b3261e;font-size:14px;min-height:20px;margin-top:6px}.hide{display:none!important}
+</style></head><body>
+<nav><div class="nv"><a href="index.html"><i class="fa-solid fa-arrow-left"></i> Ana sayfa</a><b><button class="ib" id="th" aria-label="Gece / gündüz"><i class="fa-solid fa-moon"></i></button><button class="ib hide" id="out" title="Çıkış"><i class="fa-solid fa-right-from-bracket"></i></button></b></div></nav>
+<main>
+<h1><i class="fa-solid fa-newspaper"></i> Paylaşımlar</h1><p class="sub">Gökköy’den haberler, duyurular ve fotoğraflar.</p>
+
+<form class="card" id="lgf"><div class="row"><div class="av"><i class="fa-solid fa-lock"></i></div><div><b class="f">Yönetici girişi</b><br><small style="color:var(--mut)">Paylaşım yapmak için giriş yapın</small></div></div>
+<input type="text" id="le" placeholder="Kullanıcı adı" autocomplete="username" autocapitalize="none" required style="margin:12px 0 8px"><input type="password" id="lp" placeholder="Şifre" autocomplete="current-password" required>
+<div class="err" id="lerr"></div><button class="btn">Giriş yap</button></form>
+
+<form class="card hide" id="pf"><div class="row"><div class="av" id="pav">Y</div><div class="meta"><b id="pwho">Yönetici</b><small>Yeni paylaşım</small></div></div>
+<textarea id="pt" maxlength="2000" placeholder="Köyde neler oluyor? Bir şey yazın…"></textarea>
+<div class="pills" id="cats"><label><input type="radio" name="c" value="Genel" checked><span>Genel</span></label><label><input type="radio" name="c" value="Duyuru"><span>Duyuru</span></label><label><input type="radio" name="c" value="Etkinlik"><span>Etkinlik</span></label><label><input type="radio" name="c" value="Hatıra"><span>Hatıra</span></label></div>
+<div class="prev" id="prev"></div>
+<div class="bar"><label class="btn ghost" style="margin:0"><i class="fa-solid fa-image"></i> Fotoğraf ekle<input type="file" id="pi" accept="image/*" multiple hidden></label><small style="color:var(--mut)" id="cnt">en fazla 4</small><span class="sp"></span><button class="btn" id="go"><i class="fa-solid fa-paper-plane"></i> Paylaş</button></div><div class="err" id="perr"></div></form>
+
+<div id="feed"></div><div class="bar" style="justify-content:center"><button class="btn ghost hide" id="more">Daha fazla göster</button></div>
+</main><div id="lb"><img alt=""></div>
+<script type="module">
+const firebaseConfig = { apiKey:"AIzaSyBGaLcWb9POgf4Lx2CSnPGUZAYG3vFXVMM", authDomain:"gokkoy.firebaseapp.com", projectId:"gokkoy", storageBucket:"gokkoy.firebasestorage.app", messagingSenderId:"323604775613", appId:"1:323604775613:web:97efdb12ccefe43fbbedd4" };
+const $=id=>document.getElementById(id),esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const UD="gokkoy.app",TR={"ç":"c","ğ":"g","ı":"i","ö":"o","ş":"s","ü":"u","â":"a","î":"i","û":"u"};
+const u2m=u=>{u=u.trim();return u.includes("@")?u:u.toLowerCase().replace(/[çğıöşüâîû]/g,c=>TR[c]).replace(/[^a-z0-9._-]/g,"")+"@"+UD},m2u=m=>m&&m.endsWith("@"+UD)?m.slice(0,-UD.length-1):m;
+let night;try{const x=localStorage.getItem("th");night=x?x==="n":(new Date().getHours()>=20||new Date().getHours()<6)}catch{night=false}
+const setT=()=>{document.documentElement.dataset.theme=night?"night":"day";$("th").innerHTML=night?"<i class='fa-solid fa-sun'></i>":"<i class='fa-solid fa-moon'></i>"};setT();
+$("th").onclick=()=>{night=!night;try{localStorage.setItem("th",night?"n":"d")}catch{};setT()};
+const ago=t=>{const s=Math.floor((Date.now()-t)/1000);if(s<60)return"az önce";if(s<3600)return Math.floor(s/60)+" dk önce";if(s<86400)return Math.floor(s/3600)+" saat önce";if(s<604800)return Math.floor(s/86400)+" gün önce";return new Date(t).toLocaleDateString("tr-TR")};
+const shrink=f=>new Promise((ok,no)=>{const im=new Image(),u=URL.createObjectURL(f);im.onerror=()=>{URL.revokeObjectURL(u);no(new Error("Bu fotoğraf okunamadı (JPEG/PNG deneyin)."))};
+ im.onload=()=>{URL.revokeObjectURL(u);let mx=900,q=.7,o;for(let i=0;i<8;i++){const r=Math.min(1,mx/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=Math.round(im.width*r);c.height=Math.round(im.height*r);c.getContext("2d").drawImage(im,0,0,c.width,c.height);o=c.toDataURL("image/jpeg",q);if(o.length<200000)break;mx*=.85;q=Math.max(.4,q-.05)}ok(o)};im.src=u});
+const {initializeApp}=await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js");
+const fs=await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"),au=await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js");
+const app=initializeApp(firebaseConfig),db=fs.getFirestore(app),auth=au.getAuth(app);
+let isAdmin=false,posts=[],lim=10,unsub,files=[];
+const hata=c=>({"auth/invalid-credential":"Kullanıcı adı veya şifre hatalı.","auth/too-many-requests":"Çok fazla deneme. Biraz bekleyin.","auth/user-not-found":"Böyle bir kullanıcı yok."}[c]||"Giriş yapılamadı.");
+function render(){const n=posts.length;
+ $("feed").innerHTML=n?posts.map(p=>{const f=(p.fotolar||[]).slice(0,4);return `<article class="card"><div class="row"><div class="av">${esc((p.yazar||"G")[0].toUpperCase())}</div><div class="meta"><b>${esc(p.yazar||"Gökköy")}</b><small>${ago(p.zaman)}</small></div><span class="tag">${esc(p.kategori||"Genel")}</span></div>
+ ${p.metin?`<div class="txt">${esc(p.metin)}</div>`:""}${f.length?`<div class="ph n${f.length}">${f.map(u=>`<img loading="lazy" src="${esc(u)}" alt="">`).join("")}</div>`:""}
+ <div class="act"><button data-w="${p.id}"><i class="fa-brands fa-whatsapp"></i> Paylaş</button>${isAdmin?`<button data-d="${p.id}" style="color:#b3261e"><i class="fa-solid fa-trash"></i> Sil</button>`:""}</div></article>`}).join(""):`<div class="card empty"><i class="fa-regular fa-newspaper" style="font-size:34px"></i><p>Henüz paylaşım yok.</p></div>`;
+ $("more").classList.toggle("hide",n<lim)}
+function listen(){unsub&&unsub();unsub=fs.onSnapshot(fs.query(fs.collection(db,"paylasimlar"),fs.orderBy("zaman","desc"),fs.limit(lim)),s=>{posts=s.docs.map(d=>({id:d.id,...d.data()}));render()},()=>{$("feed").innerHTML='<div class="card empty">Paylaşımlar yüklenemedi.</div>'})}
+listen();$("more").onclick=()=>{lim+=10;listen()};
+document.addEventListener("click",async e=>{const b=e.target.closest("button[data-w],button[data-d]"),im=e.target.closest(".ph img");
+ if(im){$("lb").querySelector("img").src=im.src;$("lb").classList.add("on");return}if(e.target.closest("#lb")){$("lb").classList.remove("on");return}
+ if(!b)return;const p=posts.find(x=>x.id===(b.dataset.w||b.dataset.d));if(!p)return;
+ if(b.dataset.w){const t=(p.metin||"").slice(0,300)+"\nGökköy Köyü\n"+location.href;if(navigator.share)try{await navigator.share({text:t});return}catch{}open("https://wa.me/?text="+encodeURIComponent(t),"_blank")}
+ else if(confirm("Bu paylaşım silinsin mi?"))try{await fs.deleteDoc(fs.doc(db,"paylasimlar",p.id))}catch{alert("Silinemedi.")}});
+$("lgf").onsubmit=async e=>{e.preventDefault();$("lerr").textContent="";try{await au.signInWithEmailAndPassword(auth,u2m($("le").value),$("lp").value)}catch(x){$("lerr").textContent=hata(x.code)}};
+$("out").onclick=()=>au.signOut(auth);
+au.onAuthStateChanged(auth,u=>{isAdmin=!!u;$("lgf").classList.toggle("hide",isAdmin);$("pf").classList.toggle("hide",!isAdmin);$("out").classList.toggle("hide",!isAdmin);
+ if(u){const n=m2u(u.email);$("pwho").textContent=n;$("pav").textContent=n[0].toUpperCase()}render()});
+const drawPrev=()=>{$("prev").innerHTML=files.map((f,i)=>`<div><img src="${URL.createObjectURL(f)}" alt=""><button type="button" data-r="${i}" aria-label="Kaldır">×</button></div>`).join("");$("cnt").textContent=files.length?files.length+"/4 fotoğraf":"en fazla 4"};
+$("pi").onchange=e=>{files=[...files,...e.target.files].slice(0,4);e.target.value="";drawPrev()};
+$("prev").onclick=e=>{const r=e.target.dataset?.r;if(r!=null){files.splice(+r,1);drawPrev()}};
+$("pf").onsubmit=async e=>{e.preventDefault();const t=$("pt").value.trim();$("perr").textContent="";if(!t&&!files.length)return $("perr").textContent="Bir şeyler yazın veya fotoğraf ekleyin.";
+ const b=$("go");b.disabled=true;b.innerHTML="Paylaşılıyor…";
+ try{const fotolar=[];for(const f of files)fotolar.push(await shrink(f));
+  await fs.addDoc(fs.collection(db,"paylasimlar"),{metin:t,fotolar,kategori:document.querySelector("input[name=c]:checked").value,yazar:m2u(auth.currentUser.email),zaman:Date.now()});
+  $("pt").value="";files=[];drawPrev()}catch(x){$("perr").textContent=/permission|insufficient/i.test(x.message||"")?"Yetkiniz yok. Bu kullanıcı yönetici listesinde olmayabilir.":(x.message||"Paylaşılamadı.")}
+ b.disabled=false;b.innerHTML="<i class='fa-solid fa-paper-plane'></i> Paylaş"};
+</script></body></html>
